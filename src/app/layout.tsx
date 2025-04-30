@@ -7,23 +7,30 @@ import Navbar from '@/components/Navbar'
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-inter'
 })
+
 const orbitron = Orbitron({ 
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-orbitron'
 })
+
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-poppins'
 })
+
 const playfair = Playfair_Display({
   subsets: ['latin'],
   display: 'swap',
-  preload: true
+  preload: true,
+  variable: '--font-playfair'
 })
 
 export const metadata: Metadata = {
@@ -43,8 +50,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta httpEquiv="Content-Security-Policy" content="default-src 'self' https://images.unsplash.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="preload"
+          href="/grid.svg"
+          as="image"
+          type="image/svg+xml"
+        />
       </head>
-      <body className={`${inter.className} ${orbitron.className} ${poppins.className} ${playfair.className}`}>
+      <body className={`${inter.variable} ${orbitron.variable} ${poppins.variable} ${playfair.variable}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
