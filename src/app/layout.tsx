@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Multi-Passion Portfolio',
   description: 'A showcase of creative passions and professional work',
+  metadataBase: new URL('http://localhost:3000'),
 }
 
 export default function RootLayout({
@@ -18,6 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' https://images.unsplash.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline';" />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
