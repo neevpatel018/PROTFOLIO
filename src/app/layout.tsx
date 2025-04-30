@@ -52,9 +52,37 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="preload"
-          href="/grid.svg"
+          href="/PROTFOLIO/grid.svg"
           as="image"
           type="image/svg+xml"
+        />
+        <link
+          rel="preload"
+          href="/PROTFOLIO/fonts/inter.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/PROTFOLIO/fonts/orbitron.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/PROTFOLIO/fonts/poppins.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/PROTFOLIO/fonts/playfair.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
         />
       </head>
       <body className={`${inter.variable} ${orbitron.variable} ${poppins.variable} ${playfair.variable}`}>
