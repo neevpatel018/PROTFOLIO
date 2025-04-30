@@ -4,20 +4,32 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import Navbar from '@/components/Navbar'
 
-const inter = Inter({ subsets: ['latin'] })
-const orbitron = Orbitron({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+})
+const orbitron = Orbitron({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+})
 const poppins = Poppins({ 
   weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin']
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
 })
 const playfair = Playfair_Display({
-  subsets: ['latin']
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
 })
 
 export const metadata: Metadata = {
   title: 'Multi-Passion Portfolio',
   description: 'A showcase of creative passions and professional work',
-  metadataBase: new URL('http://localhost:3000'),
+  metadataBase: new URL('https://neevpatel018.github.io'),
 }
 
 export default function RootLayout({
@@ -29,7 +41,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' https://images.unsplash.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline';" />
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self' https://images.unsplash.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com;" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.className} ${orbitron.className} ${poppins.className} ${playfair.className}`}>
         <ThemeProvider
