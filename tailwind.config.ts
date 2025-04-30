@@ -9,6 +9,12 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'sans-serif'],
+        orbitron: ['var(--font-orbitron)', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'serif'],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
@@ -48,6 +54,35 @@ const config: Config = {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      animation: {
+        'gradient-slow': 'gradient 15s ease infinite',
+        'text-gradient': 'text-gradient 5s ease infinite',
+      },
+      keyframes: {
+        gradient: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
+        },
+        'text-gradient': {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': '0% 50%',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': '100% 50%',
+          },
+        },
+      },
+      backgroundImage: {
+        'grid-pattern': 'linear-gradient(to right, var(--grid-color) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px)',
       },
     },
   },

@@ -3,32 +3,33 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
+import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon, InstagramLogoIcon } from '@radix-ui/react-icons'
 
 const socialLinks = [
   {
     name: 'GitHub',
-    url: 'https://github.com/username',
-    icon: 'github',
+    href: 'https://github.com/neevpatel018',
+    icon: GitHubLogoIcon,
   },
   {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/in/username',
-    icon: 'linkedin',
+    href: '#',
+    icon: LinkedInLogoIcon,
   },
   {
     name: 'Twitter',
-    url: 'https://twitter.com/username',
-    icon: 'twitter',
+    href: '#',
+    icon: TwitterLogoIcon,
   },
   {
     name: 'Instagram',
-    url: 'https://instagram.com/username',
-    icon: 'instagram',
+    href: '#',
+    icon: InstagramLogoIcon,
   },
 ]
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
+  const [formState, setFormState] = useState({
     name: '',
     email: '',
     message: '',
@@ -37,118 +38,132 @@ export default function ContactSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
-    console.log(formData)
+    console.log('Form submitted:', formState)
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">Get in Touch</h2>
-        <p className="text-xl text-muted-foreground">
-          Let's collaborate and create something amazing
-        </p>
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <section id="contact" className="py-20 relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-pattern" />
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          className="text-center mb-16"
         >
-          <Card className="p-6">
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) =>
-                    setFormData({ ...formData, name: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border rounded-md"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border rounded-md"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-1"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  value={formData.message}
-                  onChange={(e) =>
-                    setFormData({ ...formData, message: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border rounded-md h-32"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary text-primary-foreground py-2 rounded-md hover:bg-primary/90 transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          </Card>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 font-orbitron">
+            Get in Touch
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Have a project in mind or just want to say hello? Let's talk!
+          </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="flex flex-col justify-center"
-        >
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold">Connect with me</h3>
-            <p className="text-muted-foreground">
-              Follow me on social media or reach out directly
-            </p>
-            <div className="flex gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:text-primary/80 transition-colors"
+        <div className="grid md:grid-cols-2 gap-8 items-start">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <Card className="p-6 backdrop-blur-sm bg-background/50 border-primary/10">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                    placeholder="Your name"
+                    value={formState.name}
+                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    required
+                    className="w-full px-4 py-2 rounded-md bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+                    placeholder="your@email.com"
+                    value={formState.email}
+                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                  />
+                </div>
+                
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={4}
+                    className="w-full px-4 py-2 rounded-md bg-background border border-input focus:border-primary focus:ring-1 focus:ring-primary transition-colors resize-none"
+                    placeholder="Your message..."
+                    value={formState.message}
+                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  />
+                </div>
+                
+                <button
+                  type="submit"
+                  className="w-full px-8 py-3 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                 >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </motion.div>
+                  Send Message
+                </button>
+              </form>
+            </Card>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <Card className="p-6 backdrop-blur-sm bg-background/50 border-primary/10">
+              <h3 className="text-xl font-bold mb-4 font-orbitron">Connect with Me</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {socialLinks.map((link) => {
+                  const Icon = link.icon
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors p-2 rounded-lg hover:bg-accent/10"
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span>{link.name}</span>
+                    </a>
+                  )
+                })}
+              </div>
+            </Card>
+
+            <Card className="p-6 backdrop-blur-sm bg-background/50 border-primary/10">
+              <h3 className="text-xl font-bold mb-4 font-orbitron">Location</h3>
+              <p className="text-muted-foreground">
+                Based in Toronto, Canada
+                <br />
+                Available for remote work worldwide
+              </p>
+            </Card>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   )
 } 
