@@ -1,89 +1,106 @@
 "use client"
 
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { useTheme } from 'next-themes'
+import { Menu, X } from 'lucide-react'
 
-const navItems = [
-  { name: 'Home', href: '#home' },
-  { name: 'Web Dev', href: '#web-dev' },
-  { name: 'UI/UX', href: '#ui-ux' },
-  { name: 'Music', href: '#music' },
-  { name: 'Photography', href: '#photography' },
-  { name: 'Writing', href: '#writing' },
-  { name: 'Contact', href: '#contact' },
-]
-
-export default function Navbar() {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const [isScrolled, setIsScrolled] = useState(false)
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
-    setMounted(true)
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      setScrolled(window.scrollY > 10)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  if (!mounted) return null
+  const navItems = [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects' },
+    { name: 'Skills', path: '/skills' },
+    { name: 'Contact', path: '/contact' },
+  ]
 
   return (
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-background/80 backdrop-blur-lg shadow-lg'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-background/80 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="flex-shrink-0"
-          >
-            <span className="font-orbitron text-xl font-bold text-primary">
+          <Link href="/" className="flex items-center space-x-2">
+            <span className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               NP
             </span>
-          </motion.div>
+          </Link>
 
-          <div className="hidden md:block">
-            <div className="flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={item.name}
-                  href={item.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="text-foreground/80 hover:text-primary transition-colors relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
-                </motion.a>
-              ))}
-            </div>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`relative group text-sm font-medium transition-colors ${
+                  pathname === item.path
+                    ? 'text-primary'
+                    : 'text-foreground/60 hover:text-foreground'
+                }`}
+              >
+                {item.name}
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-primary to-accent transition-all duration-300 ${
+                    pathname === item.path ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
+                />
+              </Link>
+            ))}
           </div>
 
+          {/* Mobile Menu Button */}
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="p-2 rounded-full hover:bg-muted transition-colors"
+            className="md:hidden p-2 rounded-lg hover:bg-accent/10 transition-colors"
+            onClick={() => setIsOpen(!isOpen)}
           >
-            {theme === 'dark' ? (
-              <SunIcon className="w-5 h-5" />
-            ) : (
-              <MoonIcon className="w-5 h-5" />
-            )}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
+
+        {/* Mobile Navigation */}
+        <motion.div
+          initial={false}
+          animate={{ height: isOpen ? 'auto' : 0 }}
+          className="md:hidden overflow-hidden"
+        >
+          <div className="py-4 space-y-4">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                href={item.path}
+                className={`block text-sm font-medium transition-colors ${
+                  pathname === item.path
+                    ? 'text-primary'
+                    : 'text-foreground/60 hover:text-foreground'
+                }`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </motion.nav>
   )
-} 
+}
+
+export default Navbar 
